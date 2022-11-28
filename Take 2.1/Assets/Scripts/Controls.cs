@@ -7,10 +7,13 @@ using Unity.VisualScripting;
 public class Controls : MonoBehaviour
 {
     Animator animator;
-    Rigidbody2D rb;  //rb as in rigidbody
+    private Rigidbody2D rb;  //rb as in rigidbody
     float inputX;
+    float inputY;
 
-    public float speed = 8f;
+    private float moveSpeed;
+    private float jumpForce;
+    private bool isJumping;
 
     //for attack function
     public LayerMask enemyLayer;    //makes sure the player attacks the enemy (right layer)
@@ -27,8 +30,11 @@ public class Controls : MonoBehaviour
     void Start()
     {
         //grabbing components
+        moveSpeed = 0.3f;
+        jumpForce = 8f;
+        isJumping = false;
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
         timing = new Stopwatch();
         timing.Start();
     }
@@ -37,13 +43,14 @@ public class Controls : MonoBehaviour
     void Update()
     {
         //grabs horizontal movement input
-        inputX = Input.GetAxis("Horizontal");
+        inputX = Input.GetAxisRaw("Horizontal");
+        inputY = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("f"))
         {
             timing.Stop();
             cooldown = timing.ElapsedMilliseconds;
-            if (cooldown >= 1000)
+            if (cooldown >= 500)
             {
                 Attack();
                 timing.Reset();
@@ -57,13 +64,21 @@ public class Controls : MonoBehaviour
     private void FixedUpdate()
     {
         //flips sprite on x-axis when changing direction
-        if (inputX > 0)
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        if (inputX < 0)
+        if (inputX > 0.1f)
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        if (inputX < 0.1f)
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
         //give character velocity to move
-        rb.velocity = new Vector2(inputX * speed, rb.velocity.y);
+        if(inputX > 0.1f || inputX < -0.1f)
+        {
+          rb.AddForce(new Vector2(inputX * moveSpeed, 0f), ForceMode2D.Impulse);
+        }
+        if(!isJumping && inputY > 0.1f)
+        {
+          rb.AddForce(new Vector2(0f, inputY * jumpForce), ForceMode2D.Impulse);
+        }
+
 
         //set animation triggers for run (positive) and idle (negative)
         if (Mathf.Abs(inputX) > 0)
@@ -91,5 +106,21 @@ public class Controls : MonoBehaviour
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage); //make the enemy take damage using TakeDamage() function
         }
  
+    }
+    // jump check / isgrounded function
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Platform")
+        {
+            isJumping = false;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Platform")
+        {
+            isJumping = true;
+        }
     }
 }
