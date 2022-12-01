@@ -25,7 +25,6 @@ public class Controls : MonoBehaviour
     public Stopwatch timing;
     public long cooldown;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -65,14 +64,21 @@ public class Controls : MonoBehaviour
     {
         //flips sprite on x-axis when changing direction
         if (inputX > 0.1f)
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        if (inputX < 0.1f)
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        if (inputX < 0.1f)
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         //give character velocity to move
-        if(inputX > 0.1f || inputX < -0.1f)
+        if (inputX > 0.1f || inputX < -0.1f)
         {
-          rb.AddForce(new Vector2(inputX * moveSpeed, 0f), ForceMode2D.Impulse);
+            if (rb.velocity.x < 10f && rb.velocity.x > -10f)
+            {
+                rb.AddForce(new Vector2(inputX * moveSpeed, 0f), ForceMode2D.Impulse);
+            }
+        }
+        else
+        {
+            rb.velocity = new Vector2(0f, 0f);
         }
         if(!isJumping && inputY > 0.1f)
         {
