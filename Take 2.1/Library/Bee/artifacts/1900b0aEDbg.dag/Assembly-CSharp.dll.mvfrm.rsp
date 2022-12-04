@@ -122,9 +122,13 @@ Library\Bee\artifacts\mvdfrm\UnityEngine.VirtualTexturingModule.dll_0F77381DFE79
 Library\Bee\artifacts\mvdfrm\UnityEngine.VRModule.dll_AE347736D63342FB.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.WindModule.dll_446183EFEE0C7177.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.XRModule.dll_E0F33A3B5F6D9059.mvfrm
+<<<<<<< Updated upstream
 Library\Bee\artifacts\mvdfrm\Unity.Burst.Cecil.dll_DB79E74BFF071D0B.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Burst.Cecil.Mdb.dll_264BE2D09CC1CB08.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Burst.Cecil.Pdb.dll_3D9E5B401B76CC8B.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Burst.Cecil.Rocks.dll_7AA806E87B241C0B.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Burst.Unsafe.dll_9B2F6F240D4C7518.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.Antlr3.Runtime.dll_B891E1A1F18F96A0.mvfrm
+=======
+Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.Antlr3.Runtime.dll_788D8D1F46E76BCF.mvfrm
+>>>>>>> Stashed changes

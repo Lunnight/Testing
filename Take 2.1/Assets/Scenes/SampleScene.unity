@@ -137,9 +137,10 @@ GameObject:
   - component: {fileID: 335773643}
   - component: {fileID: 335773642}
   - component: {fileID: 335773647}
+  - component: {fileID: 335773648}
   m_Layer: 0
   m_Name: Fighter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -299,6 +300,21 @@ MonoBehaviour:
   attackRange: 0.5
   attackPoint: {fileID: 2134745591}
   cooldown: 0
+--- !u!114 &335773648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335773641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31378f3fc5e9c70458e5e1cf9426483d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  currentMaxHealth: 100
+  cooldownMilliseconds: 2000
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51284a7217c33de409ce71e054e493da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 335773648}
+  dmgAmount: 10
 --- !u!95 &669986975
 Animator:
   serializedVersion: 4

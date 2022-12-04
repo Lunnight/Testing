@@ -33,4 +33,17 @@ public class Enemy : MonoBehaviour
             this.enabled = false;   //stops this script
         }
     }
+
+    //04.12.2022 - enemy attack
+
+    //makes script look inside player health script
+    public Health health;
+    public int dmgAmount;
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            health.DmgUnit(dmgAmount);
+        }
+    }
 }
